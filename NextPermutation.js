@@ -1,36 +1,36 @@
-const nextPermutation = function (nums) {
-    let index = -1;
-    // 1 1 5 1
-    for (let i = nums.length - 2; i >= 0; i--) {
-        if (nums[i] < nums[i + 1]) {
-            index = i;
-            break;
-        }
-    }
-    if (index == -1) {
-        let start = 0;
-        let end = nums.length - 1;
-        while (start < end) {
-            let x = nums[start];
-            nums[start++] = nums[end];
-            nums[end--] = x;
-        }
-        return;
-    }
-    for (let i = index - 1; i > index; i--) {
-        if(nums[i] > nums[index]){
-            [nums[i], nums[index]] = [nums[index], nums[i]];
-        }
-    }
-    let first = index + 1;
-    let last = nums.length - 1;
-    while (first < last) {
-        let x = nums[first];
-        nums[first++] = nums[last];
-        nums[last--] = x;
-    }
-};
-let arr = [1,3, 2]
 
-nextPermutation(arr)
-console.log(arr)
+    function nextPermutation(arr) {
+        // code here
+        let pivot = -1;
+        
+        function reverse(arr, start, end){
+            while(start < end){
+                let x = arr[start];
+                arr[start++] = arr[end];
+                arr[end--] = x;
+            }
+        }
+        for(let i = arr.length - 2; i >= 0; i--){
+            if(arr[i] < arr[i + 1]){
+                pivot = i;
+                break;
+            }
+        }
+        if(pivot == -1){
+            reverse(arr, 0, arr.length-1);
+            return;
+        }
+        // 1, 2, 4, 6, 5, 3
+        for(let i = arr.length - 1; i > pivot; i--){
+            if(arr[i] > arr[pivot]){
+                [arr[i], arr[pivot]] = [arr[pivot], arr[i]];
+                break;
+            }
+        }
+        reverse(arr, pivot + 1, arr.length - 1);
+    }
+
+
+    arr = [1, 2, 3, 6, 5, 4];
+    nextPermutation(arr)
+    console.log(arr)
