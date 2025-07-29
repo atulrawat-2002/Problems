@@ -1,45 +1,25 @@
-const getMinDefference = (height, k) => {
-    let ans = Number.MAX_SAFE_INTEGER;
-    // 1  5  8  10
-    for (let i of height) {
-        if (i + k > 0) {
-            for (let j of height) {
-                if (j + k > 0 && i != j) {
-                    if ((j + k) > (i + k)) {
-                        ans = Math.min(ans, (j + k) - (i + k));
-                        console.log(j+k, i+k, ans)
-                    }
-                }
-            }
-            for (let j of height) {
-                if (j - k > 0 && i != j) {
-                    if ((j - k) > (i + k)) {
-                        ans = Math.min(ans, (j - k) - (i + k));
-                        console.log(j-k, i+k, ans)
-                    }
-                }
-            }
+/**
+ * @param {number[]} arr
+ * @param {number} k
+ * @returns {number}
+ */
+class Solution {
+    getMinDiff(arr, k) {
+        // code here
+        arr.sort((a, b) => a - b);
+        let n = arr.length;
+        let ans = arr[n - 1] - arr[0];
+        let mn = 0;
+        let mx = 0;
+        for(let i = 1; i < n; i++){
+            
+            if(arr[i] - k < 0) continue;
+            mn = Math.min(arr[0] + k, arr[i] - k);
+            mx = Math.max(arr[n - 1] - k, arr[i - 1] + k);
+            
+            ans = Math.min(ans, mx - mn);
         }
-        if (i - k > 0) {
-            for (let j of height) {
-                if (j + k > 0 && i != j) {
-                    if ((j + k) > (i - k)) {
-                        ans = Math.min(ans, (j + k) - (i - k));
-                        console.log(j+k, i-k, ans)
-                    }
-                }
-            }
-            for (let j of height) {
-                if (j - k > 0 && i != j) {
-                    if ((j - k) > (i - k)) {
-                        ans = Math.min(ans, (j - k) - (i - k));
-                        console.log(j-k, i-k, ans)
-                    }
-                }
-            }
-        }
+        
+        return ans;
     }
-    return ans;
 }
-let ans = getMinDefference([1, 5, 8, 10], 2);
-console.log(ans)
