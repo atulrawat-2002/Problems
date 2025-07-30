@@ -1,6 +1,5 @@
 
    function maxSubarraySum(arr) {
-        // Code here
         
         let mx = Number.MIN_SAFE_INTEGER;
         let sum = 0;
