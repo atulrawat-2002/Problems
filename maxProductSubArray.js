@@ -1,37 +1,27 @@
-
-   function maxProduct(arr) {
-        // code here
-        // 2 -5 -2 -4 3
-        // -1 2 -3 4 -5
-        if(arr.length === 1){
-            return arr[0];
-        }
-        
-        let n = arr.length;
-        let i = 1, j = 0;
-        let product = arr[0];
-        let mxProduct = Number.MIN_SAFE_INTEGER;
-        let ans = arr[0];
-        
-        while(i < n - 1){
-            product *= arr[i++];
-            if(product === 0){
-                while(j < n - 1){
-                    if(mxProduct < 0){
-                        mxProduct /= arr[j];
-                        if(mxProduct >= 0){
-                            break;
-                        }
-                    }
-                    j++;
-                }
-            }  
-            ans = Math.max(mxProduct, product);
-            mxProduct = product;
-        }
-        
-        console.log(ans, product)
-        
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxProduct = function(nums) {
+    let n = nums.length;
+    if(n === 1){
+        return nums[0];
     }
 
-    maxProduct([2, 3, 4])
+    let ans = Number.MIN_SAFE_INTEGER;
+    let leftSum = 1;
+    let rightSum = 1;
+
+    for(let i = 0; i < n; i++){
+
+        if(leftSum === 0) leftSum = 1;
+        if(rightSum === 0) rightSum = 1;
+
+        leftSum *= nums[i];
+        rightSum *= nums[n - 1 -i];
+
+        ans = Math.max(ans, Math.max(leftSum, rightSum));
+    }
+
+    return ans;
+};
