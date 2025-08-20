@@ -1,0 +1,2 @@
+Height of the recursive tree of a binary search function is ceiling value of log n
+h = [log n]
