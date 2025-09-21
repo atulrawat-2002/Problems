@@ -16,3 +16,6 @@ var isValidBST = function(root) {
 
     return true;
 };
+
+
+/******************************** USING MIN AND MAX RANGES *********************** */
