@@ -32,33 +32,24 @@ class MaxHeap {
   }
 
   deleteRoot() {
-    if (this.size === 0) {console.log("no elements"); return ;}
-    ;
+    if(this.size === 0) return;
 
     this.arr[1] = this.arr[this.size];
     this.size--;
 
     let index = 1;
 
-    while (index * 2 <= this.size) {
-      let leftChild = 2 * index;
-      let rightChild = 2 * index + 1;
-      let largest = index;
+    while(index < this.size) {
+      let left = 2 * index;
+      let right = 2 * index + 1;
 
-      if (leftChild <= this.size && this.arr[index] < this.arr[leftChild]) {
-        largest = leftChild;
-      }
-      if (rightChild <= this.size && this.arr[index] < this.arr[rightChild]) {
-        largest = rightChild;
-      }
-
-      if (largest != index) {
-        [this.arr[index], this.arr[largest]] = [
-          this.arr[largest],
-          this.arr[index],
-        ];
-        index = largest;
-      } else break;
+      if( left < this.size && this.arr[left] > this.arr[index]) {
+        [this.arr[index], this.arr[left]] = [this.arr[left], this.arr[index]];
+        index = left;
+      } else if (right < this.size && this.arr[right] > this.arr[index]) {
+        [this.arr[index], this.arr[right]] = [this.arr[right], this.arr[index]];
+        index = right;
+      } else return;
     }
   }
 
@@ -77,8 +68,8 @@ h.deleteRoot();
 
 h.deleteRoot();
 
-// h.deleteRoot();
-// h.deleteRoot();
-// h.deleteRoot();
 h.deleteRoot();
+// h.deleteRoot();
+// h.deleteRoot();
+// h.deleteRoot();
 h.print();
