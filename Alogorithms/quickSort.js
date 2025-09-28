@@ -5,34 +5,34 @@ function swap(a, b) {
 }
 
 function partition(low, upp) {
-  let start = low,
-    end = upp;
+  let start = low, end = upp;
   let pivot = low;
-
   while (start < end) {
-    do {
+    while (start <= upp && arr[start] <= arr[pivot]) {
       start++;
-    } while (arr[start] <= arr[pivot]);
-    do {
+    }
+    while (end >= low && arr[end] > arr[pivot]) {
       end--;
-    } while (arr[end] > arr[pivot]);
-
-    if (start < end) swap(start, end);
+    }
+    if (start < end) {
+      swap(start, end);
+    }
   }
+    swap(pivot, end);
+return end;
 
-  swap(pivot, low);
-  return upp;
 }
 
 function quickSort(low, upp) {
   if (low < upp) {
     let pos = partition(low, upp);
-    quickSort(low, pos);
+    quickSort(low, pos - 1);
     quickSort(pos + 1, upp);
   }
 }
 
+
+
 console.log(arr);
-arr.push(Infinity);
 quickSort(0, arr.length - 1);
-console.log(arr);
+console.log(arr)
