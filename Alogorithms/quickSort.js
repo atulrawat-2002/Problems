@@ -8,15 +8,10 @@ function partition(low, upp) {
   let start = low, end = upp;
   let pivot = low;
   while (start < end) {
-    while (start <= upp && arr[start] <= arr[pivot]) {
-      start++;
-    }
-    while (end >= low && arr[end] > arr[pivot]) {
-      end--;
-    }
-    if (start < end) {
-      swap(start, end);
-    }
+    do start++ ; while(start <= upp && arr[start] <= arr[pivot]) 
+        do end-- ; while(end >= low && arr[end] > arr[pivot]);
+
+    if(start < end) swap(start ,end);
   }
     swap(pivot, end);
 return end;
@@ -26,7 +21,7 @@ return end;
 function quickSort(low, upp) {
   if (low < upp) {
     let pos = partition(low, upp);
-    quickSort(low, pos - 1);
+    quickSort(low, pos);
     quickSort(pos + 1, upp);
   }
 }
@@ -34,5 +29,6 @@ function quickSort(low, upp) {
 
 
 console.log(arr);
+arr.push(Infinity)
 quickSort(0, arr.length - 1);
 console.log(arr)
