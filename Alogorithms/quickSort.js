@@ -1,9 +1,38 @@
 let arr = [3, 9, 6, 5, 4, 8, 1, 7, 2];
 
-
-function quickSort (l, h) {
-    let j = partition(l, h);
-
-    quickSort(l, j);
-    quickSort(j + 1, h)
+function swap(a, b) {
+  [arr[a], arr[b]] = [arr[b], arr[a]];
 }
+
+function partition(low, upp) {
+  let start = low,
+    end = upp;
+  let pivot = low;
+
+  while (start < end) {
+    do {
+      start++;
+    } while (arr[start] <= arr[pivot]);
+    do {
+      end--;
+    } while (arr[end] > arr[pivot]);
+
+    if (start < end) swap(start, end);
+  }
+
+  swap(pivot, low);
+  return upp;
+}
+
+function quickSort(low, upp) {
+  if (low < upp) {
+    let pos = partition(low, upp);
+    quickSort(low, pos);
+    quickSort(pos + 1, upp);
+  }
+}
+
+console.log(arr);
+arr.push(Infinity);
+quickSort(0, arr.length - 1);
+console.log(arr);
