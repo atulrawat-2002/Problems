@@ -1,4 +1,4 @@
-let arr = [3, 9, 6, 5, 4, 8, 1, 7, 2];
+let arr = Array(100000).fill(7);
 
 function swap(a, b) {
   [arr[a], arr[b]] = [arr[b], arr[a]];
@@ -6,22 +6,23 @@ function swap(a, b) {
 
 function partition(low, upp) {
   let start = low, end = upp;
-  let pivot = low;
-  while (start < end) {
-    do start++ ; while(start <= upp && arr[start] <= arr[pivot]) 
-        do end-- ; while(end >= low && arr[end] > arr[pivot]);
+  let pivot = arr[low];
+  while(start < end) {
+    while(start <= upp && arr[start] < pivot) start++; 
+    while(end >= low && arr[end] > pivot) end--;
 
-    if(start < end) swap(start ,end);
+    if(start < end) swap(start, end);
   }
-    swap(pivot, end);
-return end;
+  swap(low, end);
+
+  return end;
 
 }
 
 function quickSort(low, upp) {
   if (low < upp) {
     let pos = partition(low, upp);
-    quickSort(low, pos);
+    quickSort(low, pos - 1);
     quickSort(pos + 1, upp);
   }
 }
@@ -29,6 +30,5 @@ function quickSort(low, upp) {
 
 
 console.log(arr);
-arr.push(Infinity)
 quickSort(0, arr.length - 1);
 console.log(arr)
