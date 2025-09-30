@@ -99,3 +99,41 @@ var mergeKLists = function(arr) {
         
         return newHead;
 };
+
+/************************ MERGING LISTS ONE BY ONE ******************* */
+
+var mergeKLists = function(lists) {
+        lists = lists.filter( node => node != null );
+        if(!lists.length) return null;
+        
+        function merge(head1, head2) {
+            
+            let dummy = new ListNode(-1);
+            
+            let cur = dummy;
+            
+            while(head1 && head2) {
+                if(head1.val < head2.val) {
+                    cur.next = head1;
+                    head1 = head1.next;
+                } else {
+                    cur.next = head2;
+                    head2 = head2.next;
+                }
+                cur = cur.next;
+            }
+            
+            cur.next = head1 || head2;
+            
+            return dummy.next;
+        }
+        
+        
+        let first = lists[0];
+        
+        for(let second = 1; second < lists.length; second++) {
+            first = merge(first, lists[second]);
+        }
+        
+        return first;
+};
