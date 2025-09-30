@@ -68,3 +68,52 @@ class Solution {
 }
 
 }
+
+
+/****************************** USING QUICK SELECT AND THREE WAY PARTITIONING ****************************** */
+
+
+var kClosest = function (points, k) {
+
+        k = k - 1;
+        
+        const getRandom = (l, h) => l + Math.floor( Math.random() * (h - l + 1) );
+        
+        const dist = ([x, y]) => x * x + y * y;
+        
+        const swap = (i, j) => [points[i], points[j]] = [points[j], points[i]];
+        
+        function partition (low, high) {
+            let pivotIndex = getRandom(low, high);
+            let pivot = points[pivotIndex];
+            let less = low, equal = low, greater = high;
+            
+            while(equal <= greater) {
+                if( dist(points[equal]) < dist(pivot) ) {
+                    swap(equal, less);
+                    equal++, less++;
+                } 
+                else if( dist(points[equal]) === dist(pivot) ) equal++;
+                else {
+                    swap( greater, equal );
+                    greater--;
+                }
+            }
+            
+            return [less, greater];
+        }
+        
+        function quickSelect (low, high) {
+            while(low < high) {
+                let [start, end] = partition(low, high);
+                if(k < start) high = start - 1;
+                else if(k > end) low = end  + 1;
+                else return;    
+            }
+        }
+        
+        quickSelect(0, points.length - 1);
+        
+        return points.slice(0, k + 1);
+
+};
