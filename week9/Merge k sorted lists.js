@@ -137,3 +137,45 @@ var mergeKLists = function(lists) {
         
         return first;
 };
+
+/************************** USING DIVIDE AND CONQURE  *************************** */
+
+function merge(head1, head2) {
+            
+            let dummy = new Node(-1);
+            let cur = dummy;
+            
+            while(head1 && head2) {
+                if(head1.data < head2.data) {
+                    cur.next = head1;
+                    head1 = head1.next;
+                } else {
+                    cur.next = head2;
+                    head2 = head2.next;
+                }
+                cur = cur.next;
+            }
+            
+            cur.next = head1 || head2;
+            
+            return dummy.next;
+            
+        }
+        
+        function mergeList (low, high) {
+            
+            if(low === high) return arr[low];
+            
+            let mid = low + Math.floor((high - low) / 2);
+            
+            let head1 = mergeList(low, mid);
+            let head2 = mergeList(mid + 1, high);
+            
+            let newHead = merge(head1, head2);
+            
+            return newHead;
+        }
+        
+        return mergeList(0, arr.length - 1);
+    
+
