@@ -10,7 +10,7 @@ function bubbleSort() {
                 console.log(`swapping ${arr[i]} is greater then ${arr[j]}`)
                 swap(i, j)
                 console.log(arr);
-                
+                 
             }
         }
     }

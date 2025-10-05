@@ -40,7 +40,7 @@ console.log(arr);
 /*******************************  NOTES  ****************** */
 
 /*
-
+ 
 If we use Infinity or the maximum value at the end of the array, we can prevent the array from going to end.
 if use this version of algorithm 
 let i = low;
