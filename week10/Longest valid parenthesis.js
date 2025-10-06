@@ -71,4 +71,4 @@ var longestValidParentheses = function(s) {
     }
 
     return maxLen;
-};
+}; 
