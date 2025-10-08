@@ -86,6 +86,40 @@ class Solution {
 }
 
 
+/**************************** IN SINGLE PASS ******************** */
 
+/**
+ * @param {number[]} arr
+ * @returns {number}
+ */
+class Solution {
+    getMaxArea(arr) {
+        // code here
+        let n = arr.length;
+        let stack = [];
+        let maxArea = 0;
+        
+        for(let i = 0; i < n; i++) {
+            
+            while(stack.length && arr[stack[stack.length - 1]] > arr[i]) {
+                let top = stack.pop();
+                let left = stack.length ? stack[stack.length - 1] : -1;
+                let area = arr[top] * ( i - left - 1 );
+                maxArea = Math.max(area, maxArea);
+            }
+            stack.push(i);
+            
+        }
+        
+        while(stack.length) {
+            let top = stack.pop();
+            let left = stack.length ? stack[stack.length - 1] : -1 ;
+            let area = arr[top] * ( n - left - 1 );
+            maxArea = Math.max(area, maxArea);
+        }
+        
+        return maxArea;
+    }
+} 
 
 
