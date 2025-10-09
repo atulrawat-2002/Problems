@@ -27,6 +27,57 @@ function findMax() {
   console.log(ans);
 }
 
-let arr = [10, 20, 30, 50, 10, 70, 30];
+/************************ USING DEQUEUE ************************** */
 
-findMax(arr);
+
+class Solution {
+    maxOfMins(arr) {
+        // code here
+        let n = arr.length;
+        let ans = [];
+        
+        for(let k = 1; k <= n; k++) {
+            let dq = [];
+            let curMin = [];
+            let maxi = -Infinity;
+            
+            
+            for(let i = 0; i < k; i++) {
+                
+                while(dq.length && arr[i] <= arr[dq[dq.length - 1]]) {
+                    dq.pop();
+                }
+                dq.push(i);
+                
+            }
+            
+            maxi = Math.max(maxi, arr[dq[0]]);
+            
+            for(let i = k; i < n; i++) {
+                
+                while(dq.length && dq[0] <= i - k) {
+                    dq.shift();
+                }
+                
+                while(dq.length && arr[i] <= arr[dq[dq.length - 1]]) {
+                    dq.pop();
+                }
+                
+                dq.push(i);
+                
+                maxi = Math.max(maxi, arr[dq[0]]);
+            }
+            
+            
+            ans.push(maxi);
+            
+        }
+        
+        return ans;
+        
+    }
+}
+
+
+
+
