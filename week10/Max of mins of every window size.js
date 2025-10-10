@@ -78,6 +78,56 @@ class Solution {
     }
 }
 
+/******************************* USING NEXT SMALLER AND PREVIOUS SMALLER AND RANGE *************************** */
+
+
+class Solution {
+    maxOfMins(arr) {
+        // code here
+        let n = arr.length;
+        let ans = new Array(n).fill(0);
+        let stack = [];
+        
+        for(let i = 0; i < n; i++) {
+            
+            while(stack.length && arr[i] < arr[stack[stack.length - 1]]) {
+                let index = stack.pop();
+                let right = i;
+                if(stack.length) {
+                    let left = stack[stack.length - 1];
+                    let range = right - left - 1;
+                    ans[range - 1] = Math.max(ans[range - 1], arr[index]);
+                } else {
+                    let range = right;
+                    ans[range - 1] = Math.max(ans[range - 1], arr[index]);
+                }
+            }
+            
+            stack.push(i);
+            
+        }
+        
+        while(stack.length) {
+            let index = stack.pop();
+            let right = n;
+            if(stack.length) {
+                let left = stack[stack.length - 1];
+                let range = right - left - 1;
+                ans[range - 1] = Math.max(ans[range - 1], arr[index]);
+            } else {
+                let range = n;
+                ans[range - 1] = Math.max(ans[range - 1], arr[index]);
+            }
+        }
+        
+        for(let i = n - 2; i >= 0; i--) {
+            ans[i] = Math.max(ans[i], ans[i + 1]);
+        }
+        
+        return ans;
+        
+    }
+}
 
 
 
