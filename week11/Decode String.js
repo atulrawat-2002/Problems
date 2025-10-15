@@ -25,3 +25,57 @@ var decodeString = function(s) {
 
     return currStr;
 };
+
+
+/******************** USING SINGLE STACK **************************/
+/**
+ * @param {string} s
+ * @return {string}
+ */
+class Solution {
+    decodedString(s) {
+        // code here
+        let n = s.length;
+        let st = [];
+        
+        for(let i = 0; i < n; i++) {
+            let cnt = 0;
+            
+            if( !isNaN(s[i]) ) {
+                while( !isNaN(s[i]) ) {
+                    cnt = cnt * 10 + ( s[i] - '0');
+                    i++;
+                }
+                i--;
+                cnt = cnt.toString()
+                st.push(cnt);
+                
+            } else if(s[i] === ']') {
+                
+                let temp = "";
+                
+                while( st[st.length - 1] != '[') {
+                    temp = st.pop() + temp;
+                }
+                
+                st.pop();
+                let cnt = parseInt(st.pop(), 10);
+                
+                temp = temp.repeat(cnt);
+                
+                for(let c of temp) {
+                    st.push(c);
+                }
+                
+            } else {
+                st.push(s[i]);
+            }
+            
+        }
+        let ans = "";
+        while(st.length) {
+            ans = st.pop() + ans;
+        }
+        return ans;
+    }
+}
