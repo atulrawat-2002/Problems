@@ -1,3 +1,5 @@
+#     USING MIN AND MAX HEAP IN N LOG N
+
 import heapq
 
 class Solution:
@@ -32,4 +34,38 @@ class Solution:
                 
                 
             
+# USING DEQUE AND o(n) TIME COMPLEXITY
+
+class Solution:
+    def longestSubarray(self, nums: List[int], limit: int) -> int:
+        left = 0
+        ans = 0
+
+        min_q = deque()
+        max_q = deque()
+
+        for right in range(len(nums)):
+
+            while max_q and max_q[-1] < nums[right]:
+                max_q.pop()
+
+            while min_q and min_q[-1] > nums[right]:
+                min_q.pop()
+
+            min_q.append(nums[right])
+            max_q.append(nums[right])
+
+            while max_q[0] - min_q[0] > limit:
+
+                if nums[left] == min_q[0]:
+                    min_q.popleft()
+                if nums[left] == max_q[0]:
+                    max_q.popleft()
+                left += 1
+
+            ans = max(ans, right - left + 1)
+
+        return ans
+
+
         
