@@ -2,6 +2,7 @@
 
 import heapq
 
+
 class Solution:
     def longestSubarray(self, arr, x):
         #code here
@@ -35,7 +36,7 @@ class Solution:
                 
             
 # USING DEQUE AND o(n) TIME COMPLEXITY
-
+import deque
 class Solution:
     def longestSubarray(self, nums: List[int], limit: int) -> int:
         left = 0
