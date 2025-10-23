@@ -24,3 +24,5 @@ class Solution:
 
         return lcs_rec(n - 1, m - 1 )
         
+
+# USING TABULATION (TOP DOWN APPROACH)
