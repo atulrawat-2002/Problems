@@ -39,7 +39,7 @@ var checkIfPrerequisite = function(numCourses, prerequisites, queries) {
 
     // answer queries
     for (let [u, v] of queries) {
-        result.push(pre[v].has(u));   // ✅ correct direction
+        result.push(pre[v].has(u));   
     }
 
     return result;
